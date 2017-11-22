@@ -2,11 +2,26 @@
   "name": "watertext",
   "version": "0.0.1",
   "description": "Vanilla JavaScript image watermarking with text",
-  "main": "index.js",
+  "main": "dist/watertext.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/pavlov99/watertext.git"
   },
   "author": "Kirill Pavlov <k@p99.io>",
-  "license": "MIT"
+  "license": "MIT",
+  "keywords": [
+    "watermark",
+    "image",
+    "data-uri"
+  ],
+  "scripts": {
+    "lint": "eslint webpack.config.js index.js src",
+    "build": "webpack --config=webpack.config.js"
+  },
+  "devDependencies": {
+    "eslint": "^4.11.0",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.8.0",
+    "webpack": "^3.8.1"
+  }
 }
