@@ -1,0 +1,12 @@
+{
+  "name": "watertext",
+  "version": "0.0.1",
+  "description": "Vanilla JavaScript image watermarking with text",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pavlov99/watertext.git"
+  },
+  "author": "Kirill Pavlov <k@p99.io>",
+  "license": "MIT"
+}
