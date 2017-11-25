@@ -11,7 +11,7 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].js',
     library: 'watertext',
-    libraryTarget: 'umd',
+    libraryTarget: 'umd2',
   },
   plugins: [
     new webpack.optimize.UglifyJsPlugin({
@@ -20,8 +20,15 @@ module.exports = {
     }),
   ],
   module: {
-    loaders: [
-
-    ],
+    rules: [{
+      test: /\.js$/,
+      exclude: /(node_modules|bower_components)/,
+      use: {
+        loader: 'babel-loader',
+        options: {
+          presets: ['@babel/preset-env'],
+        },
+      },
+    }],
   },
 };

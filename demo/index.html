@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<body>
+  <h1>Javascript Watermark plugin. Add text or image watermark.</h1>
+  <div>
+    <img id='example1' src='cat.jpeg'>
+  </div>
+
+  <script src="../dist/watertext.js" type="text/javascript"></script>
+  <script>
+    (function(){
+      var example1Element = window.document.getElementById('example1');
+      var example1Watermarked = window.document.createElement('img');
+      example1Watermarked.src = watertext.default(example1Element.src, {
+        text: 'Watermarked'
+      });
+      example1Element.parentNode.appendChild(example1Watermarked);
+    })()
+  </script>
+</body>
+</html>
