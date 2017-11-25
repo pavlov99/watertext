@@ -1,19 +1,30 @@
+/**
+ * Image watermarking with text.
+ *
+ * @author Kirill Pavlov <k@p99.io>
+ * @copyright Copyright (c) 2017, Kirill Pavlov
+ * @license MIT
+ */
+
 const defaultOptions = {
   // Watermark image options
   text: '',
-  textWidth: 130,
-  textSize: 13,
+  textWidth: undefined,
+  textSize: 12,
   textFont: 'Sans-serif',
   textColor: 'rgb(255, 255, 255)',
   backgroundColor: 'rgba(0, 0, 0, 0.4)',
 
   // Watermark positioning options
   position: 'bottom', // top | left | right | bottom
-  margin: 0,
+  margin: 10,
 };
 
 /**
- * Get canvas object with image corresponding to src
+ * Get canvas object with image corresponding to src.
+ *
+ * @param {string} - an image source url or file path.
+ * @returns {Canvas} - a canvas object with image defined by src.
  */
 const getResourceCanvas = function getResourceCanvas(src) {
   const img = window.document.createElement('img');
@@ -31,9 +42,11 @@ const getResourceCanvas = function getResourceCanvas(src) {
  * Return watermark canvas object to be placed on top of the image.
  *
  * @param {Object} options - a configuration object.
- * @param {} options.textSize
- * @param {} options.textFont
- * @param {} options.textColor
+ * @param {number} options.textWidth - watermark width.
+ * @param {number} options.textSize - watermarked text size.
+ * @param {string} options.textFont - watermarked text font.
+ * @param {string} options.textColor - watermarked text color.
+ * @param {string} options.backgroundColor - watermark background color.
  * @returns {Canvas} - a canvas object to be placed on top of the image.
  */
 const getWatermarkCanvas = function getWatermarkCanvas(options) {
@@ -52,6 +65,9 @@ const getWatermarkCanvas = function getWatermarkCanvas(options) {
   return canvas;
 };
 
+/**
+ * Place watermark on top of canvas with original image.
+ */
 const applyWatermark = function applyWatermark(canvas, options) {
   const watermarkCanvas = getWatermarkCanvas(options);
 
@@ -66,22 +82,19 @@ const applyWatermark = function applyWatermark(canvas, options) {
   let sy;
 
   switch (options.position) {
-    case 'left': {
+    case 'left':
       ctx.rotate(-Math.PI / 2);
-      sy = options.margin + options.margin >= 0 ? -w : w - watermarkCanvas.height;
+      sy = options.margin + (options.margin >= 0 ? -w : w - watermarkCanvas.height);
       break;
-    }
-    case 'right': {
+    case 'right':
       ctx.rotate(Math.PI / 2);
-      sy = options.margin + options.margin >= 0 ? -w : w - watermarkCanvas.height;
+      sy = options.margin + (options.margin >= 0 ? -w : w - watermarkCanvas.height);
       break;
-    }
-    case 'top': {
-      sy = options.margin + options.margin >= 0 ? -h : h - watermarkCanvas.height;
+    case 'top':
+      sy = options.margin + (options.margin >= 0 ? -h : h - watermarkCanvas.height);
       break;
-    }
     case 'bottom':
-      sy = -options.margin + options.margin >= 0 ? h - watermarkCanvas.height : -h;
+      sy = -options.margin + (options.margin >= 0 ? h - watermarkCanvas.height : -h);
       break;
     default:
       throw new Error(`Unknown "position" option: "${options.position}"`);
@@ -94,18 +107,31 @@ const applyWatermark = function applyWatermark(canvas, options) {
 /**
  *
  * @example
- * watertext(['http://lorempixel.com/100/100/'], {text: myWatermark})
- *   .then(function(watermarkedImageSrc){
- *     console.log(watermarkedImageSrc)
- *   })
+ * var el = document.getElementsByTagName('img')[0];
+ * el.src = watertext.default(el.src, {text: 'myWatermark'});  // In browser.
+ *
  * @param {string} resource - an image url, File object, or Image.
  * @param {Object} options - a configuration object.
- * @returns {Promise} - a promise that returns image data URI if resolved or an
- * Error if rejected.
+ * @param {number} [options.textWidth=<image width>] - watermark width.
+ * @param {number} [options.textSize=12] - watermarked text size.
+ * @param {string} [options.textFont='Sans-serif'] - watermarked text font.
+ * @param {string} [options.textColor='rgb(255, 255, 255)'] - watermarked
+ * text color.
+ * @param {string} [options.backgroundColor='rgba(0, 0, 0, 0.4)'] - watermark
+ * background color.
+ * @param {string} [options.position='bottom'] - position of watermark.
+ * One of 'top', 'bottom', 'left', 'right'.
+ * @param {number} [options.margin=10] - watermark margin from the border.
+ * Negarive margin is calculated from the opposite side of the image.
+ * @returns {string} - image data URI.
  */
 export default function watertext(resource, options = {}) {
-  const opts = Object.assign({}, defaultOptions, options);
-  const canvas = applyWatermark(getResourceCanvas(resource), opts);
+  const resourceCanvas = getResourceCanvas(resource);
+  const computedOptions = {
+    textWidth: ['left', 'right'].includes(options.position) ? resourceCanvas.height : resourceCanvas.width,
+  };
+  const opts = Object.assign({}, defaultOptions, computedOptions, options);
+  const canvas = applyWatermark(resourceCanvas, opts);
   const url = canvas.toDataURL();
   return url;
 }
