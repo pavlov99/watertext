@@ -1,0 +1,5 @@
+packageJson: package.json
+files:
+  - index.js
+branches:
+  - master
