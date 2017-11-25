@@ -1,8 +1,26 @@
 # Watertext - text watermarking library
 
+[![API Doc](https://doclets.io/pavlov99/watertext/master.svg)](https://doclets.io/pavlov99/watertext/master)
+
 ### Features
 * Zero dependencies library, works with NodeJS and in the browser.
 * 2.3kb minified version.
+
+### Quickstart
+1. Install library:
+```bash
+npm install --save watertext
+```
+2. Watermark regular image with awesome text:
+```javascript
+var el = document.getElementsByTagName('img')[0];
+
+// In browser:
+el.src = watertext.default(el.src, {text: 'myWatermark'});
+```
+| Original image | Watermarked image |
+|:---:|:---:|
+| ![orig-image](./demo/cat.jpeg) | ![watermarked-image](./demo/watermarkedCat.jpeg) |
 
 ### Development
 The library is tiny and the whole source code is in `index.js` file. It uses ES6 syntax with [AirBnB style-guide](https://github.com/airbnb/javascript). Make sure to `eslint` your code and write jsdoc for every method.
