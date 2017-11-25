@@ -1,5 +1,6 @@
 # Watertext - text watermarking library
 
+[![CircleCI](https://circleci.com/gh/pavlov99/watertext/tree/master.svg?style=svg)](https://circleci.com/gh/pavlov99/watertext/tree/master)
 [![API Doc](https://doclets.io/pavlov99/watertext/master.svg)](https://doclets.io/pavlov99/watertext/master)
 
 ### Features
