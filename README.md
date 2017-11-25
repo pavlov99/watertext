@@ -16,7 +16,7 @@ npm install --save watertext
 var el = document.getElementsByTagName('img')[0];
 
 // In browser:
-el.src = watertext.default(el.src, {text: 'myWatermark'});
+el.src = watertext.default(el.src, {text: 'Awesome cat'});
 ```
 | Original image | Watermarked image |
 |:---:|:---:|
