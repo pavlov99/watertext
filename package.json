@@ -1,6 +1,6 @@
 {
   "name": "watertext",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Vanilla JavaScript image watermarking with text",
   "main": "dist/watertext.js",
   "repository": {
