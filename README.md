@@ -5,7 +5,7 @@
 
 ### Features
 * Zero dependencies library, works with NodeJS and in the browser.
-* 2.3kb minified version.
+* 2.3kb minified (76B gzipped) version.
 
 ### Quickstart
 1. Install library:
