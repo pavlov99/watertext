@@ -20,7 +20,7 @@ module.exports = {
       include: /\.min\.js$/,
       minimize: true,
       output: {
-        comments: false
+        comments: false,
       },
     }),
   ],
