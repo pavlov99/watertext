@@ -32,6 +32,8 @@ const defaultOptions = {
 const getResourceCanvas = function getResourceCanvas(src, callback) {
 
   const img = window.document.createElement('img');
+  img.crossOrigin = 'Anonymous';
+
   img.onload = () => {
     const canvas = window.document.createElement('canvas');
     canvas.height = img.height;
