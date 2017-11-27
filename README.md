@@ -26,6 +26,11 @@ el.src = watertext.default(el.src, {text: 'Awesome cat'});
 ### Development
 The library is tiny and the whole source code is in `index.js` file. It uses ES6 syntax with [AirBnB style-guide](https://github.com/airbnb/javascript). Make sure to `eslint` your code and write jsdoc for every method.
 
+##### Supported Browsers
+```bash
+npx browserslist
+```
+
 ### Deployment
 Webpack builds both regular and minified versions to `dist` folder.
 ```bash

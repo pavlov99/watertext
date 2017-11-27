@@ -3,8 +3,10 @@ const webpack = require('webpack');
 
 module.exports = {
   entry: {
-    watertext: './index',
-    'watertext.min': './index',
+    watertext: ['core-js/fn/promise', './index'],
+    'watertext.min': ['core-js/fn/promise', './index'],
+    'watertext.core': './core',
+    'watertext.core.min': './core',
   },
   devtool: 'source-map',
   output: {
@@ -17,6 +19,9 @@ module.exports = {
     new webpack.optimize.UglifyJsPlugin({
       include: /\.min\.js$/,
       minimize: true,
+      output: {
+        comments: false
+      },
     }),
   ],
   module: {
