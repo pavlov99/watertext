@@ -5,7 +5,7 @@
 
 ### Features
 * Zero dependencies library, works with NodeJS and in the browser.
-* 2.3kb minified (76B gzipped) version.
+* 1.7kb minified (481B gzipped) version.
 
 ### Quickstart
 1. Install library:
@@ -16,12 +16,12 @@ npm install --save watertext
 ```javascript
 var el = document.getElementsByTagName('img')[0];
 
-// Version 1: callback based (watertext.core.js)
-watertext.default(el.src, {text: 'Awesome cat'}, function(err, data){
-  el.src = data;
+// Version 1: callback based (watertext.core.umd.min.js)
+watertext(el.src, {text: 'Awesome cat'}, function(err, src){
+  el.src = src;
 });
-// Version 2: promise based (watertext.js)
-watertext.default(el.src, {text: 'Awesome cat'})
+// Version 2: promise based (watertext.umd.min.js)
+watertext(el.src, {text: 'Awesome cat'})
   .then(function(url){el.src = url;});
 ```
 | Original image | Watermarked image |
@@ -29,16 +29,16 @@ watertext.default(el.src, {text: 'Awesome cat'})
 | ![orig-image](./demo/cat.jpeg) | ![watermarked-image](./demo/watermarkedCat.jpeg) |
 
 ### Versions
-
 There are two main versions:
 1. Callback-based vanilla js core.
 2. Promise-based (via core-js polyfill) regular.
 
-| Name | regular | minified |
-|---|---|---|
-| Core (Callback based) | watertext.core.js<br> (8.16 kB) | watertext.core.min.js<br> (2.27 kB)|
-| Regular (Promise based) | watertext.js<br> (57.4 kB) | watertext.min.js<br> (20.1 kB) |
+Depending on usage, there are 3 build options: CommonJS, ES6 module and [UMD](https://github.com/umdjs/umd) library. All build are handled by [rollup](https://github.com/rollup/rollup). Backend specific versions (CommonJS and ES6 module) are not minified (~5 Kb) and browser specific UMD comes in minified version only (~1.7 Kb).
 
+| Name | CommonJS | ES6 module | UMD |
+|---|---|---|---|
+| Core (Callback based) | watertext.core.cjs.js | watertext.core.esm.js | watertext.core.umd.min.js |
+| Regular (Promise based) | watertext.cjs.js | watertext.esm.js | watertext.umd.min.js |
 
 ### Development
 The library is tiny and the whole source code is in `index.js` file. It uses ES6 syntax with [AirBnB style-guide](https://github.com/airbnb/javascript). Make sure to `eslint` your code and write jsdoc for every method.
@@ -49,14 +49,14 @@ npx browserslist
 ```
 
 ### Deployment
-Webpack builds both regular and minified versions to `dist` folder.
+Webpack builds both regular and minified versions to `dist` folder. It uses [rollup](https://github.com/rollup/rollup) + [bublé](https://github.com/Rich-Harris/buble) because they are faster than webpack + buble and result into smaller build size (~30% reduction).
 ```bash
 yarn build
 ```
 
-Publish new version with `npm`:
+Publish new version with `yarn`:
 ```bash
-npm publish
+yarn publish
 ```
 
 ### Watermarking options
