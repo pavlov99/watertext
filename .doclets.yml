@@ -1,5 +1,8 @@
 packageJson: package.json
 files:
   - index.js
+  - core.js
 branches:
   - master
+articles:
+  - Overview: README.md
