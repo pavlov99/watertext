@@ -30,7 +30,6 @@ const defaultOptions = {
  * canvas (defined by @param src) or error.
  */
 const getResourceCanvas = function getResourceCanvas(src, callback) {
-
   const img = window.document.createElement('img');
   img.crossOrigin = 'Anonymous';
 
@@ -112,10 +111,11 @@ const applyWatermark = function applyWatermark(canvas, options) {
 };
 
 /**
- *
  * @example
  * var el = document.getElementsByTagName('img')[0];
- * el.src = watertext.default(el.src, {text: 'myWatermark'});  // In browser.
+ * watertext(el.src, {text: 'myWatermark'}, function (err, src) {
+ *   el.src = src;
+ * });
  *
  * @param {string} resource - an image url, File object, or Image.
  * @param {Object} options - a configuration object.
