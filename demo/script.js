@@ -20,7 +20,9 @@
     var options = getFormParameters();
     var el = window.document.getElementById('origImage');
     var elWatermarked = window.document.getElementById('watermarkedImage');
-    elWatermarked.src = watertext.default(el.src, options);
+    watertext(el.src, options, function (err, src) {
+      elWatermarked.src = src
+    });
   };
 
   function copyParametersClipboard() {
