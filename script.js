@@ -20,8 +20,8 @@
     var options = getFormParameters();
     var el = window.document.getElementById('origImage');
     var elWatermarked = window.document.getElementById('watermarkedImage');
-    watertext.default(el.src, options, function(err, data) {
-      elWatermarked.src = data;
+    watertext(el.src, options, function (err, src) {
+      elWatermarked.src = src
     });
   };
 
