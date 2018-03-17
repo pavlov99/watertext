@@ -9,6 +9,12 @@
 import watertextCallback from './core';
 
 /** Watermark image and return Promise.
+ *
+ * @example
+ * var el = document.getElementsByTagName('img')[0];
+ * watertext(el.src, {text: 'myWatermark'})
+ *  .then(src => el.src = src)
+ *
  * @async
  * @param {string} resource - an image url, File object, or Image.
  * @param {Object} options - a configuration object.
