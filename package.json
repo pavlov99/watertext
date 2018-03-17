@@ -1,6 +1,6 @@
 {
   "name": "watertext",
-  "version": "0.9.2",
+  "version": "1.0.1",
   "description": "Vanilla JavaScript image watermarking with text",
   "main": "dist/watertext.cjs.js",
   "module": "dist/watertext.esm.js",
