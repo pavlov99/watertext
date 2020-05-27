@@ -72,6 +72,7 @@ All of the parameters except `text` are optional. By default, the watermark is p
 | backgroundColor | string | 'rgba(0, 0, 0, 0.4)' | Watermark background color. Default is gray. |
 | position | string | 'bottom' | Position of watermark text, one of "top", "left", "right" or "bottom". |
 | margin | number | 10 | Margin from the nearest edge. Negative margin positions watermark at the opposite edge. Useful for text orientation control for "left" and "right" positioning. |
+| dataURL | Array | [] | Parameters of [canvas.toDataURL(type, encoderOptions)](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/toDataURL). Default format type is `image/png`. Example options: `["image/jpeg", 0.5]` or `["image/webp", 0.6]`. |
 
 ### Links
 
