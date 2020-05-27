@@ -19,6 +19,10 @@ const defaultOptions = {
   // Watermark positioning options
   position: 'bottom', // top | left | right | bottom
   margin: 10,
+
+  // DataURL optiones
+  // @see {@link https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/toDataURL}
+  dataURL: [],
 };
 
 /**
@@ -145,7 +149,7 @@ export default function watertext(resource, options, callback) {
     };
     const opts = Object.assign({}, defaultOptions, computedOptions, options);
     const canvas = applyWatermark(resourceCanvas, opts);
-    const url = canvas.toDataURL();
+    const url = canvas.toDataURL(...opts.dataURL);
     callback(null, url);
   });
 }

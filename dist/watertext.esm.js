@@ -19,6 +19,10 @@ var defaultOptions = {
   // Watermark positioning options
   position: 'bottom', // top | left | right | bottom
   margin: 10,
+
+  // DataURL optiones
+  // @see {@link https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/toDataURL}
+  dataURL: [],
 };
 
 /**
@@ -30,7 +34,6 @@ var defaultOptions = {
  * canvas (defined by @param src) or error.
  */
 var getResourceCanvas = function getResourceCanvas(src, callback) {
-
   var img = window.document.createElement('img');
   img.crossOrigin = 'Anonymous';
 
@@ -112,10 +115,11 @@ var applyWatermark = function applyWatermark(canvas, options) {
 };
 
 /**
- *
  * @example
  * var el = document.getElementsByTagName('img')[0];
- * el.src = watertext.default(el.src, {text: 'myWatermark'});  // In browser.
+ * watertext(el.src, {text: 'myWatermark'}, function (err, src) {
+ *   el.src = src;
+ * });
  *
  * @param {string} resource - an image url, File object, or Image.
  * @param {Object} options - a configuration object.
@@ -145,7 +149,7 @@ function watertext(resource, options, callback) {
     };
     var opts = Object.assign({}, defaultOptions, computedOptions, options);
     var canvas = applyWatermark(resourceCanvas, opts);
-    var url = canvas.toDataURL();
+    var url = canvas.toDataURL.apply(canvas, opts.dataURL);
     callback(null, url);
   });
 }
@@ -158,6 +162,30 @@ function watertext(resource, options, callback) {
  * @license MIT
  */
 
+/** Watermark image and return Promise.
+ *
+ * @example
+ * var el = document.getElementsByTagName('img')[0];
+ * watertext(el.src, {text: 'myWatermark'})
+ *  .then(src => el.src = src)
+ *
+ * @async
+ * @param {string} resource - an image url, File object, or Image.
+ * @param {Object} options - a configuration object.
+ * @param {string} options.text - watermark text.
+ * @param {number} [options.textWidth=<image width>] - watermark width.
+ * @param {number} [options.textSize=12] - watermarked text size.
+ * @param {string} [options.textFont='Sans-serif'] - watermarked text font.
+ * @param {string} [options.textColor='rgb(255, 255, 255)'] - watermarked
+ * text color.
+ * @param {string} [options.backgroundColor='rgba(0, 0, 0, 0.4)'] - watermark
+ * background color.
+ * @param {string} [options.position='bottom'] - position of watermark.
+ * One of 'top', 'bottom', 'left', 'right'.
+ * @param {number} [options.margin=10] - watermark margin from the border.
+ * Negarive margin is calculated from the opposite side of the image.
+ * @returns {Promise} promise which resolves into watermarked image base64 url.
+ */
 function watertext$1(resource, options) {
   return new Promise(function (resolve, reject) {
     watertext(resource, options, function (err, data) {
