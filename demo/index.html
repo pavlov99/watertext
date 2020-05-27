@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <title>Watertext demo</title>
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.1/css/bulma.min.css">
+    <style>
+      #selectedFile {
+        display: none;
+      }
+    </style>
   </head>
   <body>
     <section class="hero is-primary">
@@ -128,10 +133,13 @@
           <div class="column has-text-centered">
             <h3 class="title is-3">Original</h3>
             <img id="origImage" alt="original cat image" src="cat.jpeg">
+            <input type="file" id="selectedFile" accept="image/*">
+            <button id="selectFile" class="button">Upload Image</button>
           </div>
           <div class="column has-text-centered">
             <h3 class="title is-3">Watermarked</h3>
             <img id="watermarkedImage" alt="watermarked cat image" src="about:blank">
+            <a id="download" class="button" download="watermarked">Download Result</a>
           </div>
         </div>
       </div>
