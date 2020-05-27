@@ -30,6 +30,7 @@ import watertextCallback from './core';
  * One of 'top', 'bottom', 'left', 'right'.
  * @param {number} [options.margin=10] - watermark margin from the border.
  * Negarive margin is calculated from the opposite side of the image.
+ * @param {Array} [options.dataURL=[]] - options of canvas.toDataURL().
  * @returns {Promise} promise which resolves into watermarked image base64 url.
  */
 export default function watertext(resource, options) {

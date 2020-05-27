@@ -121,6 +121,12 @@ var applyWatermark = function applyWatermark(canvas, options) {
  *   el.src = src;
  * });
  *
+ * @example
+ * var el = document.getElementsByTagName('img')[0];
+ * watertext(el.src, {text: 'myText', dataURL: ['image/jpeg', 0.5]}, function (err, src) {
+ *   el.src = src;
+ * });
+ *
  * @param {string} resource - an image url, File object, or Image.
  * @param {Object} options - a configuration object.
  * @param {string} options.text - watermark text.
@@ -135,6 +141,7 @@ var applyWatermark = function applyWatermark(canvas, options) {
  * One of 'top', 'bottom', 'left', 'right'.
  * @param {number} [options.margin=10] - watermark margin from the border.
  * Negarive margin is calculated from the opposite side of the image.
+ * @param {Array} [options.dataURL=[]] - options of canvas.toDataURL().
  * @param {requestCallback} callback - a callback that handles result url.
  */
 function watertext(resource, options, callback) {
