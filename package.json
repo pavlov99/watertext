@@ -24,7 +24,7 @@
     "build": "rollup -c"
   },
   "devDependencies": {
-    "eslint": "~4.11.0",
+    "eslint": "~4.18.2",
     "eslint-config-airbnb-base": "~12.1.0",
     "eslint-plugin-import": "~2.8.0",
     "rollup": "~0.57.0",
